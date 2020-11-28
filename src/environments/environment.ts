@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://bluetrax.ca/public_api',
+  api_action: 'pull_fleet_locations',
+  uid: 'devtest@demo.com',
+  pwd: 'admin',
 };
 
 /*
