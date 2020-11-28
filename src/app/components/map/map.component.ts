@@ -16,17 +16,15 @@ export class MapComponent implements OnInit, OnDestroy {
   google: any;
 
   locations = [];
-  coordinates = [];
   zoom: any;
   latitude = -1.2833;
   longitude = 36.8167;
   faCoffee = faCoffee;
-  pointA = {
-    lat: '',
-    lng: '',
-  };
   pointB: any;
   line: any;
+
+  coordinates: Array<{ lat: number, lng: number }> = [];
+
 
   authData = {
     api_action: 'pull_fleet_locations',
@@ -41,6 +39,7 @@ export class MapComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    // this.initMap();
     this.displayCoordinates();
   }
 
@@ -53,44 +52,45 @@ export class MapComponent implements OnInit, OnDestroy {
           this.zoom = 7;
           this.locations = res.data;
           res.data.forEach(e => {
-            this.pointA.lat = e.latitude;
-            this.pointA.lng = e.latitude;
-            this.coordinates.push(this.pointA);
+            this.coordinates.push({ lat: e.latitude, lng: e.longitude });
           })
-          // this.pointA = this.coordinates[1];
-          // this.pointB = this.coordinates[10];
-          // this.line = new google.maps.Polyline({path: [this.pointA, this.pointB]});
-          // console.log(this.coordinates);
-          // this.initMap();
+          this.initMap();
         },
       );
   }
 
-//   initMap(): void {
-//   const map = new google.maps.Map(
-//     document.getElementById("map") as HTMLElement,
-//     {
-//       zoom: 7,
-//       center: { lat: -1.2833, lng: 36.8167 },
-//       mapTypeId: "terrain",
-//     }
-//   );
-//
-//   const flightPlanCoordinates = this.coordinates;
-//   const flightPath = new google.maps.Polyline({
-//     path: flightPlanCoordinates,
-//     geodesic: true,
-//     strokeColor: "#FF0000",
-//     strokeOpacity: 1.0,
-//     strokeWeight: 2,
-//   });
-//
-//   flightPath.setMap(map);
-// }
+  initMap(): void {
+    const map = new google.maps.Map(
+      document.getElementById("map") as HTMLElement,
+      {
+        zoom: 7,
+        center: { lat: -1.2833, lng: 36.8167 },
+        mapTypeId: "terrain",
+      }
+    );
 
-// addMarker() {
-//
-// }
+    const flightPlanCoordinates = this.coordinates;
+    const flightPath = new google.maps.Polyline({
+      path: flightPlanCoordinates,
+      geodesic: true,
+      strokeColor: "#FF0000",
+      strokeOpacity: 1.0,
+      strokeWeight: 2,
+    });
+
+    flightPath.setMap(map);
+  }
+
+  // addMarker() {
+  //
+  // }
+
+  //   for (var i = 0; i < a.length; i++) {
+  //     if(i % 2 === 0) { // index is even
+  //         ar.push(a[i]);
+  //     }
+  // }
+
 
 
   ngOnDestroy(): void {
