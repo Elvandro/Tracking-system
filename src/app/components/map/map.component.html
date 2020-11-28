@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+      <div class="card map">
+        <div class="card-header">
+          <h6>Location on map</h6>
+        </div>
+        <div class="card-body">
+          <!-- <div id="map"></div> -->
+          <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" id="map">
+            <agm-marker  *ngFor="let loc of locations"  [latitude]="loc.latitude" [longitude]="loc.longitude"></agm-marker>
+          </agm-map>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <div class="card card-small" *ngFor="let loc of locations">
+        <div class="card-body">
+          <div class="car-details">
+            <div class="location">{{loc.location_desc}}</div>
+            <div class="date">{{loc.location_time | date: 'mediumDate'}}</div>
+            <div class="time">{{loc.location_time | date: 'shortTime'}}</div>
+          </div>
+          <div class="car">
+            <img src="assets/car-solid.svg">
+            <div class="reg-no">{{loc.reg_no}}</div>
+            <div class="speed">Speed: {{loc.speed}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
