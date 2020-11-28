@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "rivercross-test"
+    }
+  },
+  "defaultProject": "rivercross-test",
+  "cli": {
+    "analytics": "e1343363-a9b1-4801-bd14-e414285b1b69"
+  }
 }
